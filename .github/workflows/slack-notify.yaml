@@ -1,0 +1,19 @@
+name: Notify Slack
+
+on:
+  push:
+    branches:
+        - '**'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send message to Slack
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{
+            "text": "🚀 New push to main branch!"
+          }' \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
